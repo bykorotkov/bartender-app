@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // height: 100vh;
+
+    .header {
+        font-size: 50px;
+        line-height: 60px;
+        font-weight: 800;
+        letter-spacing: 10px;
+        text-align: center;
+    }
+}
