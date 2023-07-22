@@ -77,6 +77,17 @@ const Personal = () => {
                 >
                     абракадабра
                 </button>
+                <button
+                    type="button"
+                    onClick={() =>
+                        reset({
+                            phone: "",
+                            name: "",
+                        })
+                    }
+                >
+                    абракадабра2
+                </button>
                 <button type="submit" disabled={!isValid}>
                     Отправить
                 </button>
