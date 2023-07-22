@@ -10,7 +10,7 @@ function CocktailList() {
 
     useEffect(() => {
         axios
-            .get("www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
+            .get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink&c=Cocktail&a=Alcoholic&limit=5000")
             .then((response) => {
                 setCocktails(response.data.drinks);
             })
