@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Personal.module.scss";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useActions } from "../../hooks/useActions";
 
 const Personal = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const { login } = useActions();
+
+    console.log(login);
+
     const {
         register,
         handleSubmit,
-        clearErrors,
         reset,
-        setValue,
-        watch,
         formState: { errors, isValid },
     } = useForm({
         defaultValues: {},
         mode: "onBlur",
     });
 
-    const submit = (data) => {
+    const submit = (data, e) => {
         console.log(data);
+        e.preventDefault();
+        login(username, password);
         reset();
     };
     const error = (data) => {
@@ -27,6 +34,7 @@ const Personal = () => {
     return (
         <div className={styles.Container}>
             <div className={styles.Header}>Авторизуйтесь</div>
+            {error && <div style={{ color: "red" }}>{error}</div>}
             <form className={styles.FormContainer} onSubmit={handleSubmit(submit, error)}>
                 <h1>Форма авторизации</h1>
                 <label>
@@ -40,6 +48,7 @@ const Personal = () => {
                             },
                         })}
                         aria-invalid={errors.name ? true : false}
+                        value={username}
                     />
                 </label>
                 <div className={styles.ErrorHandler}>{errors?.name && <p>{errors?.name?.message || "Ошибка ввода"}</p>}</div>
@@ -51,6 +60,7 @@ const Personal = () => {
                             minLength: { value: 11, message: "Введите корректный номер телефона" },
                             maxLength: { value: 11, message: "Введите корректный номер телефона" },
                         })}
+                        value={password}
                     />
                 </label>
                 <div className={styles.ErrorHandler}>{errors?.phone && <p>{errors?.phone?.message || "Ошибка ввода"}</p>}</div>
